@@ -10,13 +10,13 @@ annotations:
     authors:
     - ORCID: 0000-0002-8408-850X
       name: Zunlong Ke
-      primary_annotator_status: true
+      primary_author_status: true
     - ORCID: 0000-0002-2195-4730
       name: Joaquin Oton
-      primary_annotator_status: true
+      primary_author_status: true
     - ORCID: 0000-0002-3152-2237
       name: Kun Qu
-      primary_annotator_status: true
+      primary_author_status: true
     - ORCID: 0000-0003-1786-4211
       name: Mirko Cortese
     - ORCID: 0000-0003-2032-3600
@@ -45,9 +45,9 @@ annotations:
     confidence:
       ground_truth_used: author estimation
     dates: &id001
-      deposition_date: 2023-10-11
-      last_modified_date: 2023-11-20
-      release_date: 2023-12-10
+      deposition_date: '2023-10-11'
+      last_modified_date: '2023-11-20'
+      release_date: '2023-12-10'
     ground_truth_status: true
     is_curator_recommended: true
     method_type: automated

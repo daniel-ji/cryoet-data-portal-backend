@@ -1,3 +1,5 @@
+
+
 # Class: TomogramOffset
 
 
@@ -12,22 +14,40 @@ URI: [cdp-meta:TomogramOffset](metadataTomogramOffset)
 
 
 
+
+
 ```mermaid
  classDiagram
     class TomogramOffset
+    click TomogramOffset href "../TomogramOffset"
       TomogramOffset : x
+        
+          
+    
+    
+    TomogramOffset --> "0..1" Integer : x
+    click Integer href "../Integer"
 
-          TomogramOffset --> string : x
-
+        
       TomogramOffset : y
+        
+          
+    
+    
+    TomogramOffset --> "0..1" Integer : y
+    click Integer href "../Integer"
 
-          TomogramOffset --> string : y
-
+        
       TomogramOffset : z
+        
+          
+    
+    
+    TomogramOffset --> "0..1" Integer : z
+    click Integer href "../Integer"
 
-          TomogramOffset --> string : z
-
-
+        
+      
 ```
 
 
@@ -40,9 +60,9 @@ URI: [cdp-meta:TomogramOffset](metadataTomogramOffset)
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [x](x.md) | 0..1 <br/> [xsd:string](http://www.w3.org/2001/XMLSchema#string) |  | direct |
-| [y](y.md) | 0..1 <br/> [xsd:string](http://www.w3.org/2001/XMLSchema#string) |  | direct |
-| [z](z.md) | 0..1 <br/> [xsd:string](http://www.w3.org/2001/XMLSchema#string) |  | direct |
+| [x](x.md) | 0..1 <br/> [xsd:integer](http://www.w3.org/2001/XMLSchema#integer) |  | direct |
+| [y](y.md) | 0..1 <br/> [xsd:integer](http://www.w3.org/2001/XMLSchema#integer) |  | direct |
+| [z](z.md) | 0..1 <br/> [xsd:integer](http://www.w3.org/2001/XMLSchema#integer) |  | direct |
 
 
 
@@ -110,7 +130,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
   y:
@@ -123,7 +143,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
   z:
@@ -136,7 +156,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
 
@@ -162,7 +182,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
   y:
@@ -175,7 +195,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
   z:
@@ -188,7 +208,7 @@ attributes:
     domain_of:
     - TomogramSize
     - TomogramOffset
-    range: string
+    range: integer
     inlined: true
     inlined_as_list: true
 

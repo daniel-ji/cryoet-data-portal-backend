@@ -10,13 +10,13 @@ annotations:
     authors: &id001
     - corresponding_author_status: false
       name: Ron Kelley
-      primary_annotator_status: true
+      primary_author_status: true
     - name: Xianjun Zhang
     - name: Martin Obr
     - ORCID: 0000-0003-2020-3561
       corresponding_author_status: true
       name: Sagar Khavnekar
-      primary_annotator_status: true
+      primary_author_status: true
     - corresponding_author_status: false
       name: Ricardo D. Righetto
     - corresponding_author_status: false
@@ -42,9 +42,9 @@ annotations:
     - corresponding_author_status: true
       name: Abhay Kotecha
     dates: &id002
-      deposition_date: 2024-04-09
-      last_modified_date: 2024-04-09
-      release_date: 2024-04-09
+      deposition_date: '2024-04-09'
+      last_modified_date: '2024-04-09'
+      release_date: '2024-04-09'
     ground_truth_status: true
     is_curator_recommended: true
     method_type: hybrid
@@ -53,7 +53,7 @@ annotations:
   - binning: 4
     file_format: stopgap_star
     filter_value: '{annotation_micrograph_name}'
-    glob_string: '{run_name}/metadata/particles/f1atpase_*.star'
+    glob_string: '{run_name}/metadata/particles/f1atpase_bin*.star'
     is_visualization_default: true
     order: xyz
     shape: OrientedPoint

@@ -294,7 +294,6 @@ classes:
       - DatestampedEntity
       - AuthoredEntity
       - FundedEntity
-      - PicturedEntity
       - CrossReferencedEntity
       - ExperimentalMetadata
 
@@ -440,15 +439,15 @@ classes:
       x:
         exact_mappings:
           - cdp-common:tomogram_offset_x
-        range: float
+        range: integer
       y:
         exact_mappings:
           - cdp-common:tomogram_offset_y
-        range: float
+        range: integer
       z:
         exact_mappings:
           - cdp-common:tomogram_offset_z
-        range: float
+        range: integer
   # ============================================================================
 
   # ============================================================================
@@ -458,7 +457,6 @@ classes:
     description: Metadata describing a tomogram.
     mixins:
       - AuthoredEntity
-      - PicturedEntity
 
     attributes:
       voxel_spacing:
@@ -499,22 +497,6 @@ classes:
   # ============================================================================
   # Annotation metadata
   # ============================================================================
-  AnnotationFile:
-    description: &desc_annotation_file Metadata describing a file containing an annotation.
-    attributes:
-      format:
-        exact_mappings:
-          - cdp-common:annotation_file_format
-      shape:
-        exact_mappings:
-          - cdp-common:annotation_file_shape_type
-      path:
-        exact_mappings:
-          - cdp-common:annotation_file_path
-      is_visualization_default:
-        exact_mappings:
-          - cdp-common:annotation_file_is_visualization_default
-
   AnnotationConfidence:
     description: &desc_annotation_confidence Metadata describing the confidence of an annotation.
     attributes:
@@ -543,6 +525,88 @@ classes:
       state:
         exact_mappings:
           - cdp-common:annotation_object_state
+
+  AnnotationSourceFile:
+    description: &desc_annotation_source_file File and sourcing data for an annotation. Represents an entry in annotation.sources. 
+    attributes:
+      file_format:
+        range: string
+        required: true
+        exact_mappings:
+          - cdp-common:annotation_source_file_format
+      glob_string:
+        range: string
+        required: true
+        exact_mappings:
+          - cdp-common:annotation_source_file_glob_string
+      is_visualization_default:
+        range: boolean
+        exact_mappings:
+          - cdp-common:annotation_source_file_is_visualization_default
+
+  AnnotationOrientedPointFile:
+    is_a: AnnotationSourceFile
+    aliases: 
+    - OrientedPoint
+    description: File and sourcing data for an oriented point annotation.
+    attributes:
+      binning: 
+        range: integer
+        exact_mappings:
+          - cdp-common:annotation_source_file_oriented_point_binning
+      filter_value:
+        range: string
+        exact_mappings:
+          - cdp-common:annotation_source_file_oriented_point_filter_value
+      order:
+        range: string
+        exact_mappings:
+          - cdp-common:annotation_source_file_oriented_point_order
+  
+  AnnotationInstanceSegmentationFile:
+    is_a: AnnotationOrientedPointFile
+    aliases: 
+    - InstanceSegmentation
+    description: File and sourcing data for an instance segmentation annotation.
+    attributes: # no extended attributes
+
+  AnnotationPointFile:
+    is_a: AnnotationSourceFile
+    aliases:
+    - Point
+    description: File and sourcing data for a point annotation.
+    attributes:
+      binning: 
+        range: integer
+        exact_mappings:
+          - cdp-common:annotation_source_file_point_binning
+      columns:
+        range: string
+        exact_mappings:
+          - cdp-common:annotation_source_file_point_columns
+      delimiter:
+        range: string
+        exact_mappings:
+          - cdp-common:annotation_source_file_point_delimiter
+
+  AnnotationSegmentationMaskFile:
+    is_a: AnnotationSourceFile
+    aliases: 
+    - SegmentationMask
+    description: File and sourcing data for a segmentation mask annotation.
+    attributes: # no extended attributes
+
+  AnnotationSemanticSegmentationMaskFile:
+    is_a: AnnotationSourceFile
+    aliases: 
+    - SemanticSegmentationMask
+    description: File and sourcing data for a semantic segmentation mask annotation.
+    attributes:
+      mask_label:
+        range: integer
+        exact_mappings:
+          - cdp-common:annotation_source_file_semantic_segmentation_mask_label
+
   # ============================================================================
 
   # ============================================================================
@@ -577,8 +641,8 @@ classes:
         exact_mappings:
           - cdp-common:annotation_is_curator_recommended
       files:
-        description: *desc_annotation_file
-        range: AnnotationFile
+        description: *desc_annotation_source_file
+        range: AnnotationSourceFile
         multivalued: true
         inlined_as_list: true
         list_elements_ordered: true

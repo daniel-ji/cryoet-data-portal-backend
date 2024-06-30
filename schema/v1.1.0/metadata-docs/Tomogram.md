@@ -1,3 +1,5 @@
+
+
 # Class: Tomogram
 
 
@@ -12,65 +14,124 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 
 
 
+
+
 ```mermaid
  classDiagram
     class Tomogram
+    click Tomogram href "../Tomogram"
       AuthoredEntity <|-- Tomogram
-      PicturedEntity <|-- Tomogram
-
+        click AuthoredEntity href "../AuthoredEntity"
+      
       Tomogram : affine_transformation_matrix
+        
+          
+    
+    
+    Tomogram --> "0..1" String : affine_transformation_matrix
+    click String href "../String"
 
-          Tomogram --> string : affine_transformation_matrix
-
+        
       Tomogram : authors
+        
+          
+    
+    
+    Tomogram --> "1..*" Author : authors
+    click Author href "../Author"
 
-          Tomogram --> Author : authors
-
+        
       Tomogram : ctf_corrected
+        
+          
+    
+    
+    Tomogram --> "0..1" Boolean : ctf_corrected
+    click Boolean href "../Boolean"
 
-          Tomogram --> boolean : ctf_corrected
-
+        
       Tomogram : fiducial_alignment_status
+        
+          
+    
+    
+    Tomogram --> "0..1" FiducialAlignmentStatusEnum : fiducial_alignment_status
+    click FiducialAlignmentStatusEnum href "../FiducialAlignmentStatusEnum"
 
-          Tomogram --> fiducial_alignment_status_enum : fiducial_alignment_status
-
-      Tomogram : key_photos
-
-          Tomogram --> PicturePath : key_photos
-
+        
       Tomogram : offset
+        
+          
+    
+    
+    Tomogram --> "0..1" TomogramOffset : offset
+    click TomogramOffset href "../TomogramOffset"
 
-          Tomogram --> TomogramOffset : offset
-
+        
       Tomogram : processing
+        
+          
+    
+    
+    Tomogram --> "0..1" String : processing
+    click String href "../String"
 
-          Tomogram --> string : processing
-
+        
       Tomogram : processing_software
+        
+          
+    
+    
+    Tomogram --> "0..1" String : processing_software
+    click String href "../String"
 
-          Tomogram --> string : processing_software
-
+        
       Tomogram : reconstruction_method
+        
+          
+    
+    
+    Tomogram --> "0..1" String : reconstruction_method
+    click String href "../String"
 
-          Tomogram --> string : reconstruction_method
-
+        
       Tomogram : reconstruction_software
+        
+          
+    
+    
+    Tomogram --> "0..1" String : reconstruction_software
+    click String href "../String"
 
-          Tomogram --> string : reconstruction_software
-
+        
       Tomogram : size
+        
+          
+    
+    
+    Tomogram --> "0..1" TomogramSize : size
+    click TomogramSize href "../TomogramSize"
 
-          Tomogram --> TomogramSize : size
-
+        
       Tomogram : tomogram_version
+        
+          
+    
+    
+    Tomogram --> "0..1" String : tomogram_version
+    click String href "../String"
 
-          Tomogram --> string : tomogram_version
-
+        
       Tomogram : voxel_spacing
+        
+          
+    
+    
+    Tomogram --> "0..1" Float : voxel_spacing
+    click Float href "../Float"
 
-          Tomogram --> float : voxel_spacing
-
-
+        
+      
 ```
 
 
@@ -78,7 +139,7 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 
 
 ## Inheritance
-* **Tomogram** [ [AuthoredEntity](AuthoredEntity.md) [PicturedEntity](PicturedEntity.md)]
+* **Tomogram** [ [AuthoredEntity](AuthoredEntity.md)]
 
 
 
@@ -98,7 +159,6 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 | [size](size.md) | 0..1 <br/> [TomogramSize](TomogramSize.md) | The size of a tomogram in voxels in each dimension | direct |
 | [offset](offset.md) | 0..1 <br/> [TomogramOffset](TomogramOffset.md) | The offset of a tomogram in voxels in each dimension relative to the canonica... | direct |
 | [authors](authors.md) | 1..* <br/> [Author](Author.md) | Author of a scientific data entity | direct |
-| [key_photos](key_photos.md) | 1..1 <br/> [PicturePath](PicturePath.md) | A set of paths to representative images of a piece of data | direct |
 
 
 
@@ -149,7 +209,6 @@ description: Metadata describing a tomogram.
 from_schema: metadata
 mixins:
 - AuthoredEntity
-- PicturedEntity
 attributes:
   voxel_spacing:
     name: voxel_spacing
@@ -321,20 +380,6 @@ attributes:
     - Tomogram
     - Annotation
     range: Author
-    required: true
-    inlined: true
-    inlined_as_list: true
-  key_photos:
-    name: key_photos
-    description: A set of paths to representative images of a piece of data.
-    from_schema: metadata
-    alias: key_photos
-    owner: Tomogram
-    domain_of:
-    - PicturedEntity
-    - Dataset
-    - Tomogram
-    range: PicturePath
     required: true
     inlined: true
     inlined_as_list: true
@@ -351,7 +396,6 @@ description: Metadata describing a tomogram.
 from_schema: metadata
 mixins:
 - AuthoredEntity
-- PicturedEntity
 attributes:
   voxel_spacing:
     name: voxel_spacing
@@ -523,20 +567,6 @@ attributes:
     - Tomogram
     - Annotation
     range: Author
-    required: true
-    inlined: true
-    inlined_as_list: true
-  key_photos:
-    name: key_photos
-    description: A set of paths to representative images of a piece of data.
-    from_schema: metadata
-    alias: key_photos
-    owner: Tomogram
-    domain_of:
-    - PicturedEntity
-    - Dataset
-    - Tomogram
-    range: PicturePath
     required: true
     inlined: true
     inlined_as_list: true

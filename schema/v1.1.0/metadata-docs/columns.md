@@ -1,11 +1,13 @@
-# Slot: format
 
 
-_File format for this file_
+# Slot: columns
+
+
+_The columns used in a point annotation file._
 
 
 
-URI: [cdp-meta:format](metadataformat)
+URI: [cdp-meta:columns](metadatacolumns)
 
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:format](metadataformat)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
+| [AnnotationPointFile](AnnotationPointFile.md) | File and sourcing data for a point annotation |  no  |
 
 
 
@@ -54,16 +57,16 @@ URI: [cdp-meta:format](metadataformat)
 
 <details>
 ```yaml
-name: format
-description: File format for this file
+name: columns
+description: The columns used in a point annotation file.
 from_schema: metadata
 exact_mappings:
-- cdp-common:annotation_file_format
+- cdp-common:annotation_source_file_point_columns
 rank: 1000
-alias: format
-owner: AnnotationFile
+alias: columns
+owner: AnnotationPointFile
 domain_of:
-- AnnotationFile
+- AnnotationPointFile
 range: string
 inlined: true
 inlined_as_list: true

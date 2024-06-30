@@ -1,11 +1,13 @@
-# Slot: path
 
 
-_Path to the annotation file relative to the dataset root._
+# Slot: delimiter
+
+
+_The delimiter used in a oriented point annotation file._
 
 
 
-URI: [cdp-meta:path](metadatapath)
+URI: [cdp-meta:delimiter](metadatadelimiter)
 
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:path](metadatapath)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
+| [AnnotationPointFile](AnnotationPointFile.md) | File and sourcing data for a point annotation |  no  |
 
 
 
@@ -54,16 +57,16 @@ URI: [cdp-meta:path](metadatapath)
 
 <details>
 ```yaml
-name: path
-description: Path to the annotation file relative to the dataset root.
+name: delimiter
+description: The delimiter used in a oriented point annotation file.
 from_schema: metadata
 exact_mappings:
-- cdp-common:annotation_file_path
+- cdp-common:annotation_source_file_point_delimiter
 rank: 1000
-alias: path
-owner: AnnotationFile
+alias: delimiter
+owner: AnnotationPointFile
 domain_of:
-- AnnotationFile
+- AnnotationPointFile
 range: string
 inlined: true
 inlined_as_list: true

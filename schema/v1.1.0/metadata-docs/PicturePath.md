@@ -1,3 +1,5 @@
+
+
 # Class: PicturePath
 
 
@@ -12,18 +14,31 @@ URI: [cdp-meta:PicturePath](metadataPicturePath)
 
 
 
+
+
 ```mermaid
  classDiagram
     class PicturePath
+    click PicturePath href "../PicturePath"
       PicturePath : snapshot
+        
+          
+    
+    
+    PicturePath --> "0..1" String : snapshot
+    click String href "../String"
 
-          PicturePath --> string : snapshot
-
+        
       PicturePath : thumbnail
+        
+          
+    
+    
+    PicturePath --> "0..1" String : thumbnail
+    click String href "../String"
 
-          PicturePath --> string : thumbnail
-
-
+        
+      
 ```
 
 
@@ -48,8 +63,6 @@ URI: [cdp-meta:PicturePath](metadataPicturePath)
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [PicturedEntity](PicturedEntity.md) | [key_photos](key_photos.md) | range | [PicturePath](PicturePath.md) |
-| [Dataset](Dataset.md) | [key_photos](key_photos.md) | range | [PicturePath](PicturePath.md) |
-| [Tomogram](Tomogram.md) | [key_photos](key_photos.md) | range | [PicturePath](PicturePath.md) |
 
 
 
