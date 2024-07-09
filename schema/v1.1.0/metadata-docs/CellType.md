@@ -1,3 +1,5 @@
+
+
 # Class: CellType
 
 
@@ -12,16 +14,29 @@ URI: [cdp-meta:CellType](metadataCellType)
 
 
 
+
+
 ```mermaid
  classDiagram
     class CellType
+    click CellType href "../CellType"
       CellType : id
 
-          CellType --> string : id
+
+
+
+    CellType --> "0..1" String : id
+    click String href "../String"
+
 
       CellType : name
 
-          CellType --> string : name
+
+
+
+    CellType --> "0..1" String : name
+    click String href "../String"
+
 
 
 ```
@@ -71,13 +86,14 @@ URI: [cdp-meta:CellType](metadataCellType)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:CellType |
 | native | cdp-meta:CellType |
+
+
 
 
 

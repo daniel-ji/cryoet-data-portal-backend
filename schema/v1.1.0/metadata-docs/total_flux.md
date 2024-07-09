@@ -1,3 +1,5 @@
+
+
 # Slot: total_flux
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:total_flux](metadatatotal_flux)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[TiltSeries](TiltSeries.md) | Metadata describing a tilt series |  no  |
+| [TiltSeries](TiltSeries.md) | Metadata describing a tilt series |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:total_flux](metadatatotal_flux)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:total_flux |
+| native | cdp-meta:total_flux |
+| exact | cdp-common:tiltseries_total_flux |
 
 
 

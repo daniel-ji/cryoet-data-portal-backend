@@ -1,3 +1,5 @@
+
+
 # Slot: dataset_publications
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:dataset_publications](metadatadataset_publications)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[CrossReferences](CrossReferences.md) | A set of cross-references to other databases and publications |  no  |
+| [CrossReferences](CrossReferences.md) | A set of cross-references to other databases and publications |  no  |
 
 
 
@@ -48,6 +51,16 @@ URI: [cdp-meta:dataset_publications](metadatadataset_publications)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:dataset_publications |
+| native | cdp-meta:dataset_publications |
 
 
 

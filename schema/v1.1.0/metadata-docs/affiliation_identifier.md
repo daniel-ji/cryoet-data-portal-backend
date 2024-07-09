@@ -1,3 +1,5 @@
+
+
 # Slot: affiliation_identifier
 
 URI: [cdp-meta:affiliation_identifier](metadataaffiliation_identifier)
@@ -9,12 +11,13 @@ URI: [cdp-meta:affiliation_identifier](metadataaffiliation_identifier)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[Author](Author.md) | Author of a scientific data entity |  no  |
-[Annotator](Annotator.md) | Annotator of a scientific data entity |  no  |
+| [Author](Author.md) | Author of a scientific data entity |  no  |
+| [Annotator](Annotator.md) | Annotator of a scientific data entity |  no  |
 
 
 
@@ -35,6 +38,16 @@ URI: [cdp-meta:affiliation_identifier](metadataaffiliation_identifier)
 
 
 
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:affiliation_identifier |
+| native | cdp-meta:affiliation_identifier |
 
 
 

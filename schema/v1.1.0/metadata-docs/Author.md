@@ -1,3 +1,5 @@
+
+
 # Class: Author
 
 
@@ -12,40 +14,83 @@ URI: [cdp-meta:Author](metadataAuthor)
 
 
 
+
+
 ```mermaid
  classDiagram
     class Author
+    click Author href "../Author"
       Author : affiliation_address
 
-          Author --> string : affiliation_address
+
+
+
+    Author --> "0..1" String : affiliation_address
+    click String href "../String"
+
 
       Author : affiliation_identifier
 
-          Author --> string : affiliation_identifier
+
+
+
+    Author --> "0..1 _recommended_" String : affiliation_identifier
+    click String href "../String"
+
 
       Author : affiliation_name
 
-          Author --> string : affiliation_name
+
+
+
+    Author --> "0..1" String : affiliation_name
+    click String href "../String"
+
 
       Author : email
 
-          Author --> string : email
+
+
+
+    Author --> "0..1" String : email
+    click String href "../String"
+
 
       Author : is_corresponding
 
-          Author --> boolean : is_corresponding
+
+
+
+    Author --> "0..1" Boolean : is_corresponding
+    click Boolean href "../Boolean"
+
 
       Author : is_primary_author
 
-          Author --> boolean : is_primary_author
+
+
+
+    Author --> "0..1" Boolean : is_primary_author
+    click Boolean href "../Boolean"
+
 
       Author : name
 
-          Author --> string : name
+
+
+
+    Author --> "0..1" String : name
+    click String href "../String"
+
 
       Author : ORCID
 
-          Author --> string : ORCID
+
+
+
+    Author --> "0..1 _recommended_" String : ORCID
+    click String href "../String"
+
 
 
 ```
@@ -102,13 +147,14 @@ URI: [cdp-meta:Author](metadataAuthor)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:Author |
 | native | cdp-meta:Author |
+
+
 
 
 

@@ -1,3 +1,5 @@
+
+
 # Class: AnnotatoredEntity
 
 
@@ -14,14 +16,23 @@ URI: [cdp-meta:AnnotatoredEntity](metadataAnnotatoredEntity)
 
 
 
+
+
 ```mermaid
  classDiagram
     class AnnotatoredEntity
+    click AnnotatoredEntity href "../AnnotatoredEntity"
       AnnotatoredEntity <|-- Annotation
+        click Annotation href "../Annotation"
 
       AnnotatoredEntity : authors
 
-          AnnotatoredEntity --> Annotator : authors
+
+
+
+    AnnotatoredEntity --> "1..*" Annotator : authors
+    click Annotator href "../Annotator"
+
 
 
 ```
@@ -62,13 +73,14 @@ URI: [cdp-meta:AnnotatoredEntity](metadataAnnotatoredEntity)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:AnnotatoredEntity |
 | native | cdp-meta:AnnotatoredEntity |
+
+
 
 
 
@@ -91,7 +103,6 @@ attributes:
     name: authors
     description: Annotator of a scientific data entity.
     from_schema: metadata
-    multivalued: true
     list_elements_ordered: true
     alias: authors
     owner: AnnotatoredEntity
@@ -103,6 +114,7 @@ attributes:
     - Annotation
     range: Annotator
     required: true
+    multivalued: true
     inlined: true
     inlined_as_list: true
 
@@ -122,7 +134,6 @@ attributes:
     name: authors
     description: Annotator of a scientific data entity.
     from_schema: metadata
-    multivalued: true
     list_elements_ordered: true
     alias: authors
     owner: AnnotatoredEntity
@@ -134,6 +145,7 @@ attributes:
     - Annotation
     range: Annotator
     required: true
+    multivalued: true
     inlined: true
     inlined_as_list: true
 

@@ -1,3 +1,5 @@
+
+
 # Class: TomogramOffset
 
 
@@ -12,20 +14,38 @@ URI: [cdp-meta:TomogramOffset](metadataTomogramOffset)
 
 
 
+
+
 ```mermaid
  classDiagram
     class TomogramOffset
+    click TomogramOffset href "../TomogramOffset"
       TomogramOffset : x
 
-          TomogramOffset --> string : x
+
+
+
+    TomogramOffset --> "0..1" String : x
+    click String href "../String"
+
 
       TomogramOffset : y
 
-          TomogramOffset --> string : y
+
+
+
+    TomogramOffset --> "0..1" String : y
+    click String href "../String"
+
 
       TomogramOffset : z
 
-          TomogramOffset --> string : z
+
+
+
+    TomogramOffset --> "0..1" String : z
+    click String href "../String"
+
 
 
 ```
@@ -75,13 +95,14 @@ URI: [cdp-meta:TomogramOffset](metadataTomogramOffset)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:TomogramOffset |
 | native | cdp-meta:TomogramOffset |
+
+
 
 
 

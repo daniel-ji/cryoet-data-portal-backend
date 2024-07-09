@@ -1,3 +1,5 @@
+
+
 # Class: CellComponent
 
 
@@ -12,16 +14,29 @@ URI: [cdp-meta:CellComponent](metadataCellComponent)
 
 
 
+
+
 ```mermaid
  classDiagram
     class CellComponent
+    click CellComponent href "../CellComponent"
       CellComponent : id
 
-          CellComponent --> string : id
+
+
+
+    CellComponent --> "0..1" String : id
+    click String href "../String"
+
 
       CellComponent : name
 
-          CellComponent --> string : name
+
+
+
+    CellComponent --> "0..1" String : name
+    click String href "../String"
+
 
 
 ```
@@ -71,13 +86,14 @@ URI: [cdp-meta:CellComponent](metadataCellComponent)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:CellComponent |
 | native | cdp-meta:CellComponent |
+
+
 
 
 
