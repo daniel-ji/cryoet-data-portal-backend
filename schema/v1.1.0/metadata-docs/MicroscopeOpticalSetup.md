@@ -1,3 +1,5 @@
+
+
 # Class: MicroscopeOpticalSetup
 
 
@@ -12,20 +14,38 @@ URI: [cdp-meta:MicroscopeOpticalSetup](metadataMicroscopeOpticalSetup)
 
 
 
+
+
 ```mermaid
  classDiagram
     class MicroscopeOpticalSetup
+    click MicroscopeOpticalSetup href "../MicroscopeOpticalSetup"
       MicroscopeOpticalSetup : energy_filter
 
-          MicroscopeOpticalSetup --> string : energy_filter
+
+
+
+    MicroscopeOpticalSetup --> "0..1" String : energy_filter
+    click String href "../String"
+
 
       MicroscopeOpticalSetup : image_corrector
 
-          MicroscopeOpticalSetup --> string : image_corrector
+
+
+
+    MicroscopeOpticalSetup --> "0..1" String : image_corrector
+    click String href "../String"
+
 
       MicroscopeOpticalSetup : phase_plate
 
-          MicroscopeOpticalSetup --> string : phase_plate
+
+
+
+    MicroscopeOpticalSetup --> "0..1" String : phase_plate
+    click String href "../String"
+
 
 
 ```
@@ -75,13 +95,14 @@ URI: [cdp-meta:MicroscopeOpticalSetup](metadataMicroscopeOpticalSetup)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:MicroscopeOpticalSetup |
 | native | cdp-meta:MicroscopeOpticalSetup |
+
+
 
 
 

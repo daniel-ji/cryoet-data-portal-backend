@@ -1,3 +1,5 @@
+
+
 # Slot: is_primary_author
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:is_primary_author](metadatais_primary_author)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[Author](Author.md) | Author of a scientific data entity |  no  |
+| [Author](Author.md) | Author of a scientific data entity |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:is_primary_author](metadatais_primary_author)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:is_primary_author |
+| native | cdp-meta:is_primary_author |
+| exact | cdp-common:author_primary_author_status |
 
 
 

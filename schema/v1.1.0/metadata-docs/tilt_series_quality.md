@@ -1,3 +1,5 @@
+
+
 # Slot: tilt_series_quality
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:tilt_series_quality](metadatatilt_series_quality)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[TiltSeries](TiltSeries.md) | Metadata describing a tilt series |  no  |
+| [TiltSeries](TiltSeries.md) | Metadata describing a tilt series |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:tilt_series_quality](metadatatilt_series_quality)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:tilt_series_quality |
+| native | cdp-meta:tilt_series_quality |
+| exact | cdp-common:tiltseries_tilt_series_quality |
 
 
 

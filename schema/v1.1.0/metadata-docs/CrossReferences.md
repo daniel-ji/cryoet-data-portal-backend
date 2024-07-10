@@ -1,3 +1,5 @@
+
+
 # Class: CrossReferences
 
 
@@ -12,24 +14,47 @@ URI: [cdp-meta:CrossReferences](metadataCrossReferences)
 
 
 
+
+
 ```mermaid
  classDiagram
     class CrossReferences
+    click CrossReferences href "../CrossReferences"
       CrossReferences : dataset_citations
 
-          CrossReferences --> string : dataset_citations
+
+
+
+    CrossReferences --> "0..1" String : dataset_citations
+    click String href "../String"
+
 
       CrossReferences : dataset_publications
 
-          CrossReferences --> string : dataset_publications
+
+
+
+    CrossReferences --> "0..1 _recommended_" String : dataset_publications
+    click String href "../String"
+
 
       CrossReferences : related_database_entries
 
-          CrossReferences --> string : related_database_entries
+
+
+
+    CrossReferences --> "0..1 _recommended_" String : related_database_entries
+    click String href "../String"
+
 
       CrossReferences : related_database_links
 
-          CrossReferences --> string : related_database_links
+
+
+
+    CrossReferences --> "0..1" String : related_database_links
+    click String href "../String"
+
 
 
 ```
@@ -81,13 +106,14 @@ URI: [cdp-meta:CrossReferences](metadataCrossReferences)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:CrossReferences |
 | native | cdp-meta:CrossReferences |
+
+
 
 
 

@@ -1,3 +1,5 @@
+
+
 # Slot: format
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:format](metadataformat)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
+| [AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:format](metadataformat)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:format |
+| native | cdp-meta:format |
+| exact | cdp-common:annotation_file_format |
 
 
 

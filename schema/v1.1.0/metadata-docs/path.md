@@ -1,3 +1,5 @@
+
+
 # Slot: path
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:path](metadatapath)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
+| [AnnotationFile](AnnotationFile.md) | Metadata describing a file containing an annotation |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:path](metadatapath)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:path |
+| native | cdp-meta:path |
+| exact | cdp-common:annotation_file_path |
 
 
 

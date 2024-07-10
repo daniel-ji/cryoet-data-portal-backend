@@ -1,3 +1,5 @@
+
+
 # Class: CellStrain
 
 
@@ -12,16 +14,29 @@ URI: [cdp-meta:CellStrain](metadataCellStrain)
 
 
 
+
+
 ```mermaid
  classDiagram
     class CellStrain
+    click CellStrain href "../CellStrain"
       CellStrain : id
 
-          CellStrain --> string : id
+
+
+
+    CellStrain --> "0..1" String : id
+    click String href "../String"
+
 
       CellStrain : name
 
-          CellStrain --> string : name
+
+
+
+    CellStrain --> "0..1" String : name
+    click String href "../String"
+
 
 
 ```
@@ -71,13 +86,14 @@ URI: [cdp-meta:CellStrain](metadataCellStrain)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:CellStrain |
 | native | cdp-meta:CellStrain |
+
+
 
 
 

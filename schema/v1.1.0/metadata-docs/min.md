@@ -1,3 +1,5 @@
+
+
 # Slot: min
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:min](metadatamin)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[TiltRange](TiltRange.md) | The range of tilt angles in the tilt series |  no  |
+| [TiltRange](TiltRange.md) | The range of tilt angles in the tilt series |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:min](metadatamin)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:min |
+| native | cdp-meta:min |
+| exact | cdp-common:tiltseries_tilt_min |
 
 
 

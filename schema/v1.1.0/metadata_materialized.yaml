@@ -506,7 +506,6 @@ classes:
         name: authors
         description: Author of a scientific data entity.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: authors
         owner: AuthoredEntity
@@ -515,6 +514,7 @@ classes:
         - AnnotatoredEntity
         range: Author
         required: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
   AnnotatoredEntity:
@@ -527,7 +527,6 @@ classes:
         name: authors
         description: Annotator of a scientific data entity.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: authors
         owner: AnnotatoredEntity
@@ -536,6 +535,7 @@ classes:
         - AnnotatoredEntity
         range: Annotator
         required: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
   FundedEntity:
@@ -549,7 +549,6 @@ classes:
         description: A funding source for a scientific data entity (base for JSON
           and DB representation).
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: funding
         owner: FundedEntity
@@ -557,6 +556,7 @@ classes:
         - FundedEntity
         range: Funding
         recommended: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
   CrossReferencedEntity:
@@ -842,7 +842,7 @@ classes:
       other_setup:
         name: other_setup
         description: Describes other setup not covered by sample preparation or grid
-          preparation that may make this dataset unique in   the same publication.
+          preparation that may make this dataset unique in the same publication.
         from_schema: metadata
         exact_mappings:
         - cdp-common:preparation_other_setup
@@ -923,7 +923,7 @@ classes:
       dataset_identifier:
         name: dataset_identifier
         description: An identifier for a CryoET dataset, assigned by the Data Portal.
-          Used to identify the dataset as the directory  name in data tree.
+          Used to identify the dataset as the directory name in data tree.
         from_schema: metadata
         exact_mappings:
         - cdp-common:dataset_identifier
@@ -978,7 +978,6 @@ classes:
         name: authors
         description: Author of a scientific data entity.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: authors
         owner: Dataset
@@ -987,6 +986,7 @@ classes:
         - AnnotatoredEntity
         range: Author
         required: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
       funding:
@@ -994,7 +994,6 @@ classes:
         description: A funding source for a scientific data entity (base for JSON
           and DB representation).
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: funding
         owner: Dataset
@@ -1002,6 +1001,7 @@ classes:
         - FundedEntity
         range: Funding
         recommended: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
       key_photos:
@@ -1069,7 +1069,7 @@ classes:
       other_setup:
         name: other_setup
         description: Describes other setup not covered by sample preparation or grid
-          preparation that may make this dataset unique in   the same publication.
+          preparation that may make this dataset unique in the same publication.
         from_schema: metadata
         exact_mappings:
         - cdp-common:preparation_other_setup
@@ -1746,7 +1746,6 @@ classes:
         name: authors
         description: Author of a scientific data entity.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: authors
         owner: Tomogram
@@ -1755,6 +1754,7 @@ classes:
         - AnnotatoredEntity
         range: Author
         required: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
       key_photos:
@@ -2048,13 +2048,13 @@ classes:
         name: files
         description: Metadata describing a file containing an annotation.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: files
         owner: Annotation
         domain_of:
         - Annotation
         range: AnnotationFile
+        multivalued: true
         inlined: true
         inlined_as_list: true
       confidence:
@@ -2096,7 +2096,6 @@ classes:
         name: authors
         description: Annotator of a scientific data entity.
         from_schema: metadata
-        multivalued: true
         list_elements_ordered: true
         alias: authors
         owner: Annotation
@@ -2105,6 +2104,7 @@ classes:
         - AnnotatoredEntity
         range: Annotator
         required: true
+        multivalued: true
         inlined: true
         inlined_as_list: true
   CrossReferences:

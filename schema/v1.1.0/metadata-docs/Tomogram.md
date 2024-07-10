@@ -1,3 +1,5 @@
+
+
 # Class: Tomogram
 
 
@@ -12,63 +14,133 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 
 
 
+
+
 ```mermaid
  classDiagram
     class Tomogram
+    click Tomogram href "../Tomogram"
       AuthoredEntity <|-- Tomogram
+        click AuthoredEntity href "../AuthoredEntity"
       PicturedEntity <|-- Tomogram
+        click PicturedEntity href "../PicturedEntity"
 
       Tomogram : affine_transformation_matrix
 
-          Tomogram --> string : affine_transformation_matrix
+
+
+
+    Tomogram --> "0..1" String : affine_transformation_matrix
+    click String href "../String"
+
 
       Tomogram : authors
 
-          Tomogram --> Author : authors
+
+
+
+    Tomogram --> "1..*" Author : authors
+    click Author href "../Author"
+
 
       Tomogram : ctf_corrected
 
-          Tomogram --> boolean : ctf_corrected
+
+
+
+    Tomogram --> "0..1" Boolean : ctf_corrected
+    click Boolean href "../Boolean"
+
 
       Tomogram : fiducial_alignment_status
 
-          Tomogram --> fiducial_alignment_status_enum : fiducial_alignment_status
+
+
+
+    Tomogram --> "0..1" FiducialAlignmentStatusEnum : fiducial_alignment_status
+    click FiducialAlignmentStatusEnum href "../FiducialAlignmentStatusEnum"
+
 
       Tomogram : key_photos
 
-          Tomogram --> PicturePath : key_photos
+
+
+
+    Tomogram --> "1" PicturePath : key_photos
+    click PicturePath href "../PicturePath"
+
 
       Tomogram : offset
 
-          Tomogram --> TomogramOffset : offset
+
+
+
+    Tomogram --> "0..1" TomogramOffset : offset
+    click TomogramOffset href "../TomogramOffset"
+
 
       Tomogram : processing
 
-          Tomogram --> string : processing
+
+
+
+    Tomogram --> "0..1" String : processing
+    click String href "../String"
+
 
       Tomogram : processing_software
 
-          Tomogram --> string : processing_software
+
+
+
+    Tomogram --> "0..1" String : processing_software
+    click String href "../String"
+
 
       Tomogram : reconstruction_method
 
-          Tomogram --> string : reconstruction_method
+
+
+
+    Tomogram --> "0..1" String : reconstruction_method
+    click String href "../String"
+
 
       Tomogram : reconstruction_software
 
-          Tomogram --> string : reconstruction_software
+
+
+
+    Tomogram --> "0..1" String : reconstruction_software
+    click String href "../String"
+
 
       Tomogram : size
 
-          Tomogram --> TomogramSize : size
+
+
+
+    Tomogram --> "0..1" TomogramSize : size
+    click TomogramSize href "../TomogramSize"
+
 
       Tomogram : tomogram_version
 
-          Tomogram --> string : tomogram_version
+
+
+
+    Tomogram --> "0..1" String : tomogram_version
+    click String href "../String"
+
 
       Tomogram : voxel_spacing
 
-          Tomogram --> float : voxel_spacing
+
+
+
+    Tomogram --> "0..1" Float : voxel_spacing
+    click Float href "../Float"
+
 
 
 ```
@@ -98,7 +170,7 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 | [size](size.md) | 0..1 <br/> [TomogramSize](TomogramSize.md) | The size of a tomogram in voxels in each dimension | direct |
 | [offset](offset.md) | 0..1 <br/> [TomogramOffset](TomogramOffset.md) | The offset of a tomogram in voxels in each dimension relative to the canonica... | direct |
 | [authors](authors.md) | 1..* <br/> [Author](Author.md) | Author of a scientific data entity | direct |
-| [key_photos](key_photos.md) | 1..1 <br/> [PicturePath](PicturePath.md) | A set of paths to representative images of a piece of data | direct |
+| [key_photos](key_photos.md) | 1 <br/> [PicturePath](PicturePath.md) | A set of paths to representative images of a piece of data | direct |
 
 
 
@@ -124,13 +196,14 @@ URI: [cdp-meta:Tomogram](metadataTomogram)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:Tomogram |
 | native | cdp-meta:Tomogram |
+
+
 
 
 
@@ -310,7 +383,6 @@ attributes:
     name: authors
     description: Author of a scientific data entity.
     from_schema: metadata
-    multivalued: true
     list_elements_ordered: true
     alias: authors
     owner: Tomogram
@@ -322,6 +394,7 @@ attributes:
     - Annotation
     range: Author
     required: true
+    multivalued: true
     inlined: true
     inlined_as_list: true
   key_photos:
@@ -512,7 +585,6 @@ attributes:
     name: authors
     description: Author of a scientific data entity.
     from_schema: metadata
-    multivalued: true
     list_elements_ordered: true
     alias: authors
     owner: Tomogram
@@ -524,6 +596,7 @@ attributes:
     - Annotation
     range: Author
     required: true
+    multivalued: true
     inlined: true
     inlined_as_list: true
   key_photos:

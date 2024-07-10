@@ -1,3 +1,5 @@
+
+
 # Class: TomogramSize
 
 
@@ -12,20 +14,38 @@ URI: [cdp-meta:TomogramSize](metadataTomogramSize)
 
 
 
+
+
 ```mermaid
  classDiagram
     class TomogramSize
+    click TomogramSize href "../TomogramSize"
       TomogramSize : x
 
-          TomogramSize --> integer : x
+
+
+
+    TomogramSize --> "0..1" Integer : x
+    click Integer href "../Integer"
+
 
       TomogramSize : y
 
-          TomogramSize --> integer : y
+
+
+
+    TomogramSize --> "0..1" Integer : y
+    click Integer href "../Integer"
+
 
       TomogramSize : z
 
-          TomogramSize --> integer : z
+
+
+
+    TomogramSize --> "0..1" Integer : z
+    click Integer href "../Integer"
+
 
 
 ```
@@ -75,13 +95,14 @@ URI: [cdp-meta:TomogramSize](metadataTomogramSize)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:TomogramSize |
 | native | cdp-meta:TomogramSize |
+
+
 
 
 

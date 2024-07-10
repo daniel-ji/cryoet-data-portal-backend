@@ -1,3 +1,5 @@
+
+
 # Slot: is_primary_annotator
 
 
@@ -14,11 +16,12 @@ URI: [cdp-meta:is_primary_annotator](metadatais_primary_annotator)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[Annotator](Annotator.md) | Annotator of a scientific data entity |  no  |
+| [Annotator](Annotator.md) | Annotator of a scientific data entity |  no  |
 
 
 
@@ -46,6 +49,17 @@ URI: [cdp-meta:is_primary_annotator](metadatais_primary_annotator)
 
 
 * from schema: metadata
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:is_primary_annotator |
+| native | cdp-meta:is_primary_annotator |
+| exact | cdp-common:author_primary_author_status |
 
 
 

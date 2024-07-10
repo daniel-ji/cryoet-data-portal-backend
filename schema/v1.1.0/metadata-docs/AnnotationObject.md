@@ -1,3 +1,5 @@
+
+
 # Class: AnnotationObject
 
 
@@ -12,24 +14,47 @@ URI: [cdp-meta:AnnotationObject](metadataAnnotationObject)
 
 
 
+
+
 ```mermaid
  classDiagram
     class AnnotationObject
+    click AnnotationObject href "../AnnotationObject"
       AnnotationObject : description
 
-          AnnotationObject --> string : description
+
+
+
+    AnnotationObject --> "0..1" String : description
+    click String href "../String"
+
 
       AnnotationObject : id
 
-          AnnotationObject --> string : id
+
+
+
+    AnnotationObject --> "0..1" String : id
+    click String href "../String"
+
 
       AnnotationObject : name
 
-          AnnotationObject --> string : name
+
+
+
+    AnnotationObject --> "0..1" String : name
+    click String href "../String"
+
 
       AnnotationObject : state
 
-          AnnotationObject --> string : state
+
+
+
+    AnnotationObject --> "0..1" String : state
+    click String href "../String"
+
 
 
 ```
@@ -80,13 +105,14 @@ URI: [cdp-meta:AnnotationObject](metadataAnnotationObject)
 
 
 
-
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
 | self | cdp-meta:AnnotationObject |
 | native | cdp-meta:AnnotationObject |
+
+
 
 
 

@@ -1,3 +1,5 @@
+
+
 # Slot: key_photos
 
 URI: [cdp-meta:key_photos](metadatakey_photos)
@@ -9,13 +11,14 @@ URI: [cdp-meta:key_photos](metadatakey_photos)
 
 
 
+
 ## Applicable Classes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-[PicturedEntity](PicturedEntity.md) | An entity with associated preview images |  no  |
-[Dataset](Dataset.md) | High-level description of a cryoET dataset |  no  |
-[Tomogram](Tomogram.md) | Metadata describing a tomogram |  no  |
+| [Tomogram](Tomogram.md) | Metadata describing a tomogram |  no  |
+| [Dataset](Dataset.md) | High-level description of a cryoET dataset |  no  |
+| [PicturedEntity](PicturedEntity.md) | An entity with associated preview images |  no  |
 
 
 
@@ -36,6 +39,16 @@ URI: [cdp-meta:key_photos](metadatakey_photos)
 
 
 
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | cdp-meta:key_photos |
+| native | cdp-meta:key_photos |
 
 
 
