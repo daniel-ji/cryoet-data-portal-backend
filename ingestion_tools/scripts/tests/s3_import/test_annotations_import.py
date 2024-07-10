@@ -93,7 +93,7 @@ def test_import_annotation_metadata(
                     "delimiter": ",",
                     "glob_string": "annotations/*.csv",
                     "columns": "xyz",
-                }
+                },
             },
         ],
     }
@@ -148,7 +148,7 @@ ingest_points_test_cases = [
                 "file_format": "csv",
                 "glob_string": "annotations/points.csv",
                 "is_visualization_default": False,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -167,7 +167,7 @@ ingest_points_test_cases = [
                 "is_visualization_default": False,
                 "binning": 2,
                 "delimiter": "\t",
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -185,7 +185,7 @@ ingest_points_test_cases = [
                 "file_format": "csv_with_header",
                 "glob_string": "annotations/points_with_header.csv",
                 "is_visualization_default": False,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -204,7 +204,7 @@ ingest_points_test_cases = [
                 "is_visualization_default": False,
                 "binning": 2,
                 "delimiter": "|",
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -222,7 +222,7 @@ ingest_points_test_cases = [
                 "glob_string": "annotations/points.mod",
                 "is_visualization_default": False,
                 "binning": 2,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -303,7 +303,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "tomo_1.tomostar",
                 "binning": 4,
-            }
+            },
         },
         "count": 2,
         "out_data": [
@@ -337,7 +337,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "tomo_2.tomostar",
                 "binning": 2,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -379,7 +379,7 @@ ingest_oriented_points_test_cases = [
                 "glob_string": "annotations/relion_3_star.star",
                 "is_visualization_default": False,
                 "filter_value": "tomo_3.tomostar",
-            }
+            },
         },
         "count": 1,
         "out_data": [
@@ -401,7 +401,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "grid_1_lamella1_pos1",
                 "binning": 4,
-            }
+            },
         },
         "count": 2,
         "out_data": [
@@ -435,7 +435,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "grid_1_lamella1_pos2",
                 "binning": 2,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -477,7 +477,7 @@ ingest_oriented_points_test_cases = [
                 "glob_string": "annotations/tomoman_relion_star.star",
                 "is_visualization_default": False,
                 "filter_value": "grid_1_lamella1_pos3",
-            }
+            },
         },
         "count": 1,
         "out_data": [
@@ -499,7 +499,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "TS_001",
                 "binning": 4,
-            }
+            },
         },
         "count": 2,
         "out_data": [
@@ -533,7 +533,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "TS_002",
                 "binning": 2,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -575,7 +575,7 @@ ingest_oriented_points_test_cases = [
                 "glob_string": "annotations/relion_4_star.star",
                 "is_visualization_default": False,
                 "filter_value": "TS_003",
-            }
+            },
         },
         "count": 1,
         "out_data": [
@@ -597,7 +597,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "1",
                 "binning": 4,
-            }
+            },
         },
         "count": 2,
         "out_data": [
@@ -631,7 +631,7 @@ ingest_oriented_points_test_cases = [
                 "is_visualization_default": False,
                 "filter_value": "2",
                 "binning": 2,
-            }
+            },
         },
         "count": 3,
         "out_data": [
@@ -673,7 +673,7 @@ ingest_oriented_points_test_cases = [
                 "glob_string": "annotations/stopgap_star.star",
                 "is_visualization_default": False,
                 "filter_value": "3",
-            }
+            },
         },
         "count": 1,
         "out_data": [
@@ -693,7 +693,7 @@ ingest_oriented_points_test_cases = [
                 "glob_string": "annotations/oriented_points.mod",
                 "is_visualization_default": False,
                 "filter_value": None,
-            }
+            },
         },
         "count": 4,
         "out_data": [
@@ -765,7 +765,7 @@ def test_ingest_oriented_point_data(
         binning=case["source_cfg"]["OrientedPoint"].get("binning"),
         file_format=case["source_cfg"]["OrientedPoint"]["file_format"],
         filter_value=case["source_cfg"]["OrientedPoint"].get("filter_value"),
-        order=case["source_cfg"]["OrientedPoint"].get("order")
+        order=case["source_cfg"]["OrientedPoint"].get("order"),
     )
     anno.import_item()
     anno.import_metadata()
@@ -815,7 +815,7 @@ ingest_instance_points_test_cases = [
                 "glob_string": "annotations/tardis.csv",
                 "is_visualization_default": False,
                 "binning": 2,
-            }
+            },
         },
         "count": 6,
         "out_data": [

@@ -27,7 +27,7 @@ annotations:
     sources:
       # 10000 - 10010
       - SegmentationMask:
-          file_format: zarr 
+          file_format: zarr
           glob_string: "{dataset_name}/{run_name}/Tomograms/VoxelSpacing{voxel_spacing_name}/CanonicalTomogram/*ckpt_segmented_*LM52Ga.zarr"
           is_visualization_default: true
       # 10011 - 10046
@@ -37,7 +37,7 @@ annotations:
           is_visualization_default: true
       # 10047 - 10075
       - SegmentationMask:
-          file_format: zarr 
+          file_format: zarr
           glob_string: "{dataset_name}/{run_name}/Tomograms/VoxelSpacing{voxel_spacing_name}/CanonicalTomogram/*ckpt_segmented_*wO13zA.zarr"
           is_visualization_default: true
       # 10076 - 10150
@@ -52,7 +52,7 @@ annotations:
           is_visualization_default: true
       # 10226 - 10300
       - SegmentationMask:
-          file_format: zarr 
+          file_format: zarr
           glob_string: "{dataset_name}/{run_name}/Tomograms/VoxelSpacing{voxel_spacing_name}/CanonicalTomogram/*ckpt_segmented_*kpDyZk.zarr"
           is_visualization_default: true
       # Chlamy batch 1

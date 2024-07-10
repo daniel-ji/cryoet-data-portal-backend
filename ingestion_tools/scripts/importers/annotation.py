@@ -105,7 +105,7 @@ class AnnotationIdentifierHelper:
 class AnnotationImporterFactory(DepositionObjectImporterFactory):
     def __init__(self, source: dict[str, Any]):
         super().__init__(source)
-        # flatten self.source additional layer that specifies the type of annotation file it is for schema reasons
+        # flatten self.source additional layer that specifies the type of annotation file it is
         if not (len(self.source.keys()) == 1):
             raise ValueError("Incorrect annotation source format")
         source_file = list(self.source.values())[0]
