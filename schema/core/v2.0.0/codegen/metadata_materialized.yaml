@@ -523,6 +523,49 @@ enums:
       SIMULATED:
         text: SIMULATED
         description: Simulated data
+  tiltseries_tilting_scheme_enum:
+    name: tiltseries_tilting_scheme_enum
+    description: The order of stage tilting during acquisition of the data
+    from_schema: metadata
+    permissible_values:
+      bidirectional:
+        text: bidirectional
+        description: Bidirectional tilting, identical to the starting tilt to max
+          then min
+      starting tilt to max then min:
+        text: starting tilt to max then min
+        description: Starting tilt to max then min, identical to bidirectional tilting
+      dose-symmetric:
+        text: dose-symmetric
+        description: Dose-symmetric tilting, identical to dose-symmetric from 0.0
+          degrees
+      dose-symmetric from 0.0 degrees:
+        text: dose-symmetric from 0.0 degrees
+        description: Dose-symmetric from 0.0 degrees, identical to dose-symmetric
+          tilting
+      dose-symmetric with pre-tilt:
+        text: dose-symmetric with pre-tilt
+        description: Dose-symmetric with pre-tilt, identical to dose-symmetric from
+          -10.0 degrees
+      dose-symmetric from -10.0 degrees:
+        text: dose-symmetric from -10.0 degrees
+        description: Dose-symmetric from -10.0 degrees, identical to dose-symmetric
+          with pre-tilt
+      continuous:
+        text: continuous
+        description: continuous, identical min to max tilt
+      min to max tilt:
+        text: min to max tilt
+        description: Min to max tilt, identical to continuous
+      continuous; non-constant tilt steps:
+        text: continuous; non-constant tilt steps
+        description: continuous with non-constant tilt steps
+      min to max tilt; non-constant tilt steps:
+        text: min to max tilt; non-constant tilt steps
+        description: Min to max tilt with non-constant tilt steps
+      simultaed:
+        text: simultaed
+        description: Simulated data
   fiducial_alignment_status_enum:
     name: fiducial_alignment_status_enum
     description: Fiducial Alignment method
@@ -1666,8 +1709,6 @@ classes:
         name: acquire_mode
         description: A placeholder for any type of data.
         from_schema: metadata
-        exact_mappings:
-        - cdp-common:tiltseries_camera_acquire_mode
         alias: acquire_mode
         owner: CameraDetails
         domain_of:
@@ -1675,10 +1716,14 @@ classes:
         range: Any
         inlined: true
         inlined_as_list: true
-        pattern: (^[ ]*\{[a-zA-Z0-9_-]+\}[ ]*$)|((^counting$)|(^superresolution$)|(^linear$)|(^cds$))
+        pattern: (^counting$)|(^superresolution$)|(^linear$)|(^cds$)|(^[ ]*\{[a-zA-Z0-9_-]+\}[
+          ]*$)
         any_of:
+        - description: Camera acquisition mode
+          exact_mappings:
+          - cdp-common:tiltseries_camera_acquire_mode
+          range: tiltseries_camera_acquire_mode_enum
         - range: StringFormattedString
-        - range: tiltseries_camera_acquire_mode_enum
       manufacturer:
         name: manufacturer
         description: Name of the camera manufacturer
@@ -2082,10 +2127,14 @@ classes:
         owner: TiltSeries
         domain_of:
         - TiltSeries
-        range: string
+        range: tiltseries_tilting_scheme_enum
         required: true
         inlined: true
         inlined_as_list: true
+        pattern: (^bidirectional$)|(^starting tilt to max then min$)|(^dose-symmetric$)|(^dose-symmetric
+          from 0.0 degrees$)|(^dose-symmetric with pre-tilt$)|(^dose-symmetric from
+          -10.0 degrees$)|(^continuous$)|(^min to max tilt$)|(^continuous; non-constant
+          tilt steps$)|(^min to max tilt; non-constant tilt steps$)|(^simultaed$)
       total_flux:
         name: total_flux
         description: A placeholder for any type of data.

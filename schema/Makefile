@@ -35,6 +35,7 @@ clean-ingestion-config:
 	rm -f $(INGESTION_CONFIG_MODELS_MATERIALIZED_YAML)
 	rm -f $(INGESTION_CONFIG_MODELS_PY)
 	rm -f $(INGESTION_CONFIG_JSON_SCHEMA)
+	rm -rf ingestion_config/latest
 
 .PHONY: clean-docs
 clean-docs:
@@ -51,7 +52,6 @@ clean-all: CORE_VERSION=*
 clean-all: API_VERSION=*
 clean-all: INGESTION_CONFIG_VERSION=*
 clean-all: clean
-	rm -rf ingestion_config/latest
 
 .PHONY: build
 build: build-ingestion-config build-api

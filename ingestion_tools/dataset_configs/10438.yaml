@@ -373,7 +373,7 @@ tiltseries:
         min: -50
       tilt_series_quality: int {tilt_series_quality}
       tilt_step: 2.0
-      tilting_scheme: bi-directional
+      tilting_scheme: bidirectional
       total_flux: 68
     sources:
       - source_glob:

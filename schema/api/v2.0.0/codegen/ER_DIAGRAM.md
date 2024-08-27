@@ -96,7 +96,7 @@ Annotation {
     EMPIAR_EMDB_DOI_PDB_LIST annotation_publication
     string annotation_method
     boolean ground_truth_status
-    GO_ID object_id
+    string object_id
     string object_name
     string object_description
     string object_state
@@ -154,7 +154,7 @@ Tiltseries {
     float tilt_max
     float tilt_range
     float tilt_step
-    string tilting_scheme
+    tiltseries_tilting_scheme_enum tilting_scheme
     float tilt_axis
     float total_flux
     string data_acquisition_software
@@ -217,8 +217,8 @@ DepositionAuthor {
     string affiliation_name
     string affiliation_address
     string affiliation_identifier
-    string corresponding_author_status
-    string primary_author_status
+    boolean corresponding_author_status
+    boolean primary_author_status
 }
 AnnotationAuthor {
     integer id
@@ -229,8 +229,8 @@ AnnotationAuthor {
     string affiliation_name
     string affiliation_address
     string affiliation_identifier
-    string corresponding_author_status
-    string primary_author_status
+    boolean corresponding_author_status
+    boolean primary_author_status
 }
 TomogramAuthor {
     integer id
@@ -241,8 +241,8 @@ TomogramAuthor {
     string affiliation_name
     string affiliation_address
     string affiliation_identifier
-    string corresponding_author_status
-    string primary_author_status
+    boolean corresponding_author_status
+    boolean primary_author_status
 }
 DatasetAuthor {
     integer id
@@ -253,8 +253,8 @@ DatasetAuthor {
     string affiliation_name
     string affiliation_address
     string affiliation_identifier
-    string corresponding_author_status
-    string primary_author_status
+    boolean corresponding_author_status
+    boolean primary_author_status
 }
 DatasetFunding {
     string funding_agency_name

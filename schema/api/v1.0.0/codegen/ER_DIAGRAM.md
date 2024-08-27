@@ -61,7 +61,7 @@ Annotation {
     EMPIAR_EMDB_DOI_PDB_LIST annotation_publication
     string annotation_method
     boolean ground_truth_status
-    GO_ID object_id
+    string object_id
     string object_name
     string object_description
     string object_state
@@ -170,7 +170,7 @@ Tiltseries {
     float tilt_max
     float tilt_range
     float tilt_step
-    string tilting_scheme
+    tiltseries_tilting_scheme_enum tilting_scheme
     float tilt_axis
     float total_flux
     string data_acquisition_software

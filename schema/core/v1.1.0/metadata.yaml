@@ -266,8 +266,9 @@ classes:
     description: &desc_camera The camera used to collect the tilt series.
     attributes:
       acquire_mode:
-        exact_mappings:
-          - cdp-common:tiltseries_camera_acquire_mode
+        any_of:
+          - exact_mappings: cdp-common:tiltseries_camera_acquire_mode
+          - range: cdp-common:StringFormattedString
       manufacturer:
         exact_mappings:
           - cdp-common:tiltseries_camera_manufacturer
@@ -384,8 +385,9 @@ classes:
           - exact_mappings: cdp-common:tiltseries_tilt_step
           - range: cdp-common:FloatFormattedString
       tilting_scheme:
-        exact_mappings:
-          - cdp-common:tiltseries_tilting_scheme
+        any_of:
+          - exact_mappings: cdp-common:tiltseries_tilting_scheme
+          - range: cdp-common:StringFormattedString
       total_flux:
         any_of:
           - exact_mappings: cdp-common:tiltseries_total_flux

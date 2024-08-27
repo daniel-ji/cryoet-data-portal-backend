@@ -326,7 +326,7 @@ tiltseries:
       min: -60
     tilt_series_quality: 5
     tilt_step: 2.0
-    tilting_scheme: Dose-symmetric
+    tilting_scheme: dose-symmetric
     total_flux: 100
     tilt_axis: 0.0
   sources:
@@ -351,7 +351,7 @@ tiltseries:
     tilt_range: *id007
     tilt_series_quality: 5
     tilt_step: 2.0
-    tilting_scheme: bi-directional
+    tilting_scheme: bidirectional
     total_flux: 100
     tilt_axis: 0.0
   sources:
@@ -373,7 +373,7 @@ tiltseries:
     tilt_range: *id007
     tilt_series_quality: 5
     tilt_step: 2.0
-    tilting_scheme: Dose-symmetric
+    tilting_scheme: dose-symmetric
     total_flux: 100
     tilt_axis: 0.0
   sources:

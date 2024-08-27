@@ -841,18 +841,19 @@
                 "acquire_mode": {
                     "anyOf": [
                         {
-                            "pattern": "^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$",
-                            "type": "string"
+                            "$ref": "#/$defs/TiltseriesCameraAcquireModeEnum",
+                            "description": "Camera acquisition mode"
                         },
                         {
-                            "$ref": "#/$defs/TiltseriesCameraAcquireModeEnum"
+                            "pattern": "^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$",
+                            "type": "string"
                         },
                         {
                             "type": "null"
                         }
                     ],
                     "description": "Camera acquisition mode",
-                    "pattern": "(^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$)|((^counting$)|(^superresolution$)|(^linear$)|(^cds$))"
+                    "pattern": "(^counting$)|(^superresolution$)|(^linear$)|(^cds$)|(^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$)"
                 },
                 "manufacturer": {
                     "description": "Name of the camera manufacturer",
@@ -3474,8 +3475,19 @@
                     "pattern": "^float[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$"
                 },
                 "tilting_scheme": {
+                    "$ref": "#/$defs/Any",
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TiltseriesTiltingSchemeEnum",
+                            "description": "The order of stage tilting during acquisition of the data"
+                        },
+                        {
+                            "pattern": "^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$",
+                            "type": "string"
+                        }
+                    ],
                     "description": "The order of stage tilting during acquisition of the data",
-                    "type": "string"
+                    "pattern": "(^bidirectional$)|(^starting tilt to max then min$)|(^dose-symmetric$)|(^dose-symmetric from 0.0 degrees$)|(^dose-symmetric with pre-tilt$)|(^dose-symmetric from -10.0 degrees$)|(^continuous$)|(^min to max tilt$)|(^continuous; non-constant tilt steps$)|(^min to max tilt; non-constant tilt steps$)|(^simulated$)|(^[ ]*\\{[a-zA-Z0-9_-]+\\}[ ]*$)"
                 },
                 "total_flux": {
                     "$ref": "#/$defs/Any",
@@ -3705,6 +3717,24 @@
                 "SIMULATED"
             ],
             "title": "TiltseriesMicroscopeManufacturerEnum",
+            "type": "string"
+        },
+        "TiltseriesTiltingSchemeEnum": {
+            "description": "The order of stage tilting during acquisition of the data",
+            "enum": [
+                "bidirectional",
+                "starting tilt to max then min",
+                "dose-symmetric",
+                "dose-symmetric from 0.0 degrees",
+                "dose-symmetric with pre-tilt",
+                "dose-symmetric from -10.0 degrees",
+                "continuous",
+                "min to max tilt",
+                "continuous; non-constant tilt steps",
+                "min to max tilt; non-constant tilt steps",
+                "simulated"
+            ],
+            "title": "TiltseriesTiltingSchemeEnum",
             "type": "string"
         },
         "TissueDetails": {

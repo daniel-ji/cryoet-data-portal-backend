@@ -43,7 +43,7 @@ def expected_tiltseries(http_prefix: str) -> list[dict[str, Any]]:
             "tilt_max": 40.97,
             "tilt_range": 80.98,
             "tilt_step": 2,
-            "tilting_scheme": "Dose symmetric from 0.0 degrees",
+            "tilting_scheme": "dose-symmetric from 0.0 degrees",
             "tilt_axis": 84.7,
             "total_flux": 122,
             "data_acquisition_software": "SerialEM",

@@ -193,7 +193,7 @@ tiltseries:
       min: -70
     tilt_series_quality: 5
     tilt_step: 3
-    tilting_scheme: Dose symmetric from -10.0 degrees
+    tilting_scheme: dose-symmetric from -10.0 degrees
     total_flux: 130
   sources:
   - source_glob:

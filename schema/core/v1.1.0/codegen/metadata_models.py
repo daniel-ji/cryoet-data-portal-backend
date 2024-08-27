@@ -600,6 +600,35 @@ class TiltseriesMicroscopeManufacturerEnum(str, Enum):
     SIMULATED = "SIMULATED"
 
 
+class TiltseriesTiltingSchemeEnum(str, Enum):
+    """
+    The order of stage tilting during acquisition of the data
+    """
+
+    # Bidirectional tilting, identical to the starting tilt to max then min
+    bidirectional = "bidirectional"
+    # Starting tilt to max then min, identical to bidirectional tilting
+    starting_tilt_to_max_then_min = "starting tilt to max then min"
+    # Dose-symmetric tilting, identical to dose-symmetric from 0.0 degrees
+    dose_symmetric = "dose-symmetric"
+    # Dose-symmetric from 0.0 degrees, identical to dose-symmetric tilting
+    dose_symmetric_from_0FULL_STOP0_degrees = "dose-symmetric from 0.0 degrees"
+    # Dose-symmetric with pre-tilt, identical to dose-symmetric from -10.0 degrees
+    dose_symmetric_with_pre_tilt = "dose-symmetric with pre-tilt"
+    # Dose-symmetric from -10.0 degrees, identical to dose-symmetric with pre-tilt
+    dose_symmetric_from__10FULL_STOP0_degrees = "dose-symmetric from -10.0 degrees"
+    # continuous, identical min to max tilt
+    continuous = "continuous"
+    # Min to max tilt, identical to continuous
+    min_to_max_tilt = "min to max tilt"
+    # continuous with non-constant tilt steps
+    continuousSEMICOLON_non_constant_tilt_steps = "continuous; non-constant tilt steps"
+    # Min to max tilt with non-constant tilt steps
+    min_to_max_tiltSEMICOLON_non_constant_tilt_steps = "min to max tilt; non-constant tilt steps"
+    # Simulated data
+    simulated = "simulated"
+
+
 class FiducialAlignmentStatusEnum(str, Enum):
     """
     Fiducial Alignment method
@@ -1476,9 +1505,15 @@ class CameraDetails(ConfiguredBaseModel):
         json_schema_extra={
             "linkml_meta": {
                 "alias": "acquire_mode",
-                "any_of": [{"range": "StringFormattedString"}, {"range": "tiltseries_camera_acquire_mode_enum"}],
+                "any_of": [
+                    {
+                        "description": "Camera acquisition mode",
+                        "exact_mappings": ["cdp-common:tiltseries_camera_acquire_mode"],
+                        "range": "tiltseries_camera_acquire_mode_enum",
+                    },
+                    {"range": "StringFormattedString"},
+                ],
                 "domain_of": ["CameraDetails"],
-                "exact_mappings": ["cdp-common:tiltseries_camera_acquire_mode"],
             }
         },
     )
@@ -1507,7 +1542,7 @@ class CameraDetails(ConfiguredBaseModel):
 
     @field_validator("acquire_mode")
     def pattern_acquire_mode(cls, v):
-        pattern = re.compile(r"(^[ ]*\{[a-zA-Z0-9_-]+\}[ ]*$)|((^counting$)|(^superresolution$)|(^linear$)|(^cds$))")
+        pattern = re.compile(r"(^counting$)|(^superresolution$)|(^linear$)|(^cds$)|(^[ ]*\{[a-zA-Z0-9_-]+\}[ ]*$)")
         if isinstance(v, list):
             for element in v:
                 if not pattern.match(element):
@@ -1939,14 +1974,22 @@ class TiltSeries(ConfiguredBaseModel):
             }
         },
     )
-    tilting_scheme: str = Field(
+    tilting_scheme: Union[TiltseriesTiltingSchemeEnum, str] = Field(
         ...,
         description="""The order of stage tilting during acquisition of the data""",
         json_schema_extra={
             "linkml_meta": {
                 "alias": "tilting_scheme",
+                "any_of": [
+                    {
+                        "description": "The order of stage tilting during acquisition of " "the data",
+                        "exact_mappings": ["cdp-common:tiltseries_tilting_scheme"],
+                        "range": "tiltseries_tilting_scheme_enum",
+                        "required": True,
+                    },
+                    {"range": "StringFormattedString"},
+                ],
                 "domain_of": ["TiltSeries"],
-                "exact_mappings": ["cdp-common:tiltseries_tilting_scheme"],
             }
         },
     )
@@ -2080,6 +2123,20 @@ class TiltSeries(ConfiguredBaseModel):
         elif isinstance(v, str):
             if not pattern.match(v):
                 raise ValueError(f"Invalid tilt_step format: {v}")
+        return v
+
+    @field_validator("tilting_scheme")
+    def pattern_tilting_scheme(cls, v):
+        pattern = re.compile(
+            r"(^bidirectional$)|(^starting tilt to max then min$)|(^dose-symmetric$)|(^dose-symmetric from 0.0 degrees$)|(^dose-symmetric with pre-tilt$)|(^dose-symmetric from -10.0 degrees$)|(^continuous$)|(^min to max tilt$)|(^continuous; non-constant tilt steps$)|(^min to max tilt; non-constant tilt steps$)|(^simulated$)|(^[ ]*\{[a-zA-Z0-9_-]+\}[ ]*$)"
+        )
+        if isinstance(v, list):
+            for element in v:
+                if not pattern.match(element):
+                    raise ValueError(f"Invalid tilting_scheme format: {element}")
+        elif isinstance(v, str):
+            if not pattern.match(v):
+                raise ValueError(f"Invalid tilting_scheme format: {v}")
         return v
 
     @field_validator("total_flux")

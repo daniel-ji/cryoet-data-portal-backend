@@ -324,9 +324,7 @@ slots:
     minimum_value: 0
     description: Describes the binning factor from frames to tilt series file
   tiltseries_camera_acquire_mode:
-    any_of:
-      - range: StringFormattedString
-      - range: tiltseries_camera_acquire_mode_enum
+    range: tiltseries_camera_acquire_mode_enum
     description: Camera acquisition mode
   tiltseries_camera_manufacturer:
     range: string
@@ -463,7 +461,7 @@ slots:
       descriptive_name: degrees
       symbol: °
   tiltseries_tilting_scheme:
-    range: string
+    range: tiltseries_tilting_scheme_enum
     required: true
     description: The order of stage tilting during acquisition of the data
   tiltseries_total_flux:
@@ -1056,6 +1054,32 @@ enums:
       JEOL:
         description: JEOL Ltd.
       SIMULATED:
+        description: Simulated data
+
+  tiltseries_tilting_scheme_enum:
+    description: The order of stage tilting during acquisition of the data
+    permissible_values:
+      bidirectional:
+        description: Bidirectional tilting, identical to the starting tilt to max then min
+      starting tilt to max then min:
+        description: Starting tilt to max then min, identical to bidirectional tilting
+      dose-symmetric:
+        description: Dose-symmetric tilting, identical to dose-symmetric from 0.0 degrees
+      dose-symmetric from 0.0 degrees:
+        description: Dose-symmetric from 0.0 degrees, identical to dose-symmetric tilting
+      dose-symmetric with pre-tilt:
+        description: Dose-symmetric with pre-tilt, identical to dose-symmetric from -10.0 degrees
+      dose-symmetric from -10.0 degrees:
+        description: Dose-symmetric from -10.0 degrees, identical to dose-symmetric with pre-tilt
+      continuous:
+        description: continuous, identical min to max tilt
+      min to max tilt:
+        description: Min to max tilt, identical to continuous
+      continuous; non-constant tilt steps:
+        description: continuous with non-constant tilt steps
+      min to max tilt; non-constant tilt steps:
+        description: Min to max tilt with non-constant tilt steps
+      simultaed:
         description: Simulated data
 
   fiducial_alignment_status_enum:

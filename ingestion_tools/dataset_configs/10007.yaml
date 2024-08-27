@@ -158,7 +158,7 @@ tiltseries:
       min: -60
     tilt_series_quality: int {ts_quality_score}
     tilt_step: 3
-    tilting_scheme: Dose symmetric from lamella pre-tilt
+    tilting_scheme: dose-symmetric with pre-tilt
     total_flux: 143.5
   sources:
   - parent_filters:
@@ -189,7 +189,7 @@ tiltseries:
     tilt_range: *id006
     tilt_series_quality: 5
     tilt_step: 3
-    tilting_scheme: Dose symmetric from lamella pre-tilt
+    tilting_scheme: dose-symmetric with pre-tilt
     total_flux: 143.5
   sources:
   - parent_filters:

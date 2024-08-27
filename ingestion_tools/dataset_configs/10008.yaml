@@ -199,7 +199,7 @@ tiltseries:
       min: -50
     tilt_series_quality: 5
     tilt_step: 2
-    tilting_scheme: Dose symmetric from lamella pre-tilt
+    tilting_scheme: dose-symmetric with pre-tilt
     total_flux: 120
   sources:
   - source_glob:
