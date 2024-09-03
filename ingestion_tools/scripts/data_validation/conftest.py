@@ -125,7 +125,7 @@ def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "run: Tests concerning the runs.")
     config.addinivalue_line("markers", "tiltseries: Tests concerning the tiltseries.")
     config.addinivalue_line("markers", "tomogram: Tests concerning the tomogram.")
-    config.addinivalue_line("markers", "voxelspacing: Tests concerning the voxelspacing.")
+    config.addinivalue_line("markers", "voxel_spacing: Tests concerning voxel spacings.")
     config.addinivalue_line("markers", "metadata: Tests concerning any metadata.")
 
 
