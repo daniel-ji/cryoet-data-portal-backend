@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON Schema Structure Visualizer</title>
+    <title>CryoET Data Portal Ingestion Config Generator</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -29,9 +29,7 @@
         margin-top: 20px;
         border: 1px solid #ddd;
         border-radius: 5px;
-        padding: 20px;
         background-color: #f9f9f9;
-        overflow: auto;
       }
 
       ul {
@@ -46,7 +44,6 @@
       }
 
       .property:hover {
-        border-left: 2px solid #3498db;
         background-color: #ecf0f1;
       }
 
@@ -62,10 +59,24 @@
       }
 
       .property-description {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 8px 12px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        z-index: 100;
         color: #7f8c8d;
-        display: block;
-        margin-left: 20px;
         font-size: 0.9em;
+        bottom: 100%;
+        left: 0;
+      }
+
+      .property-header:hover + .property-description,
+      .property-description:hover {
+        display: block;
       }
 
       .required {
@@ -115,15 +126,83 @@
         margin-bottom: 20px;
         border-left: 4px solid #3498db;
       }
+
+      .disable-btn {
+        background-color: #f1f1f1;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 2px 6px;
+        font-size: 0.8em;
+        cursor: pointer;
+        color: #555;
+        margin-left: 10px;
+      }
+
+      .disable-btn:hover {
+        background-color: #e0e0e0;
+      }
+
+      .property-content {
+        display: flex;
+        position: relative;
+      }
+
+      .disabled .property-header {
+        opacity: 0.5;
+        color: #999;
+        pointer-events: none;
+      }
+
+      .disabled .property-name {
+        color: #999;
+      }
+
+      .disabled .property-type {
+        color: #999;
+      }
+
+      .disabled > ul {
+        opacity: 0.5;
+      }
+
+      .input-container {
+        display: inline-block;
+      }
+
+      .property-input {
+        padding: 3px 6px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        font-size: 0.9em;
+        margin-left: 5px;
+        transition: border-color 0.2s;
+      }
+
+      .property-input:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 3px rgba(52, 152, 219, 0.5);
+      }
+
+      input[type="checkbox"].property-input {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+      }
+
+      select.property-input {
+        background-color: white;
+      }
+
+      .disabled .property-input {
+        opacity: 0.5;
+        pointer-events: none;
+        background-color: #f9f9f9;
+      }
     </style>
   </head>
   <body>
-    <h1>JSON Schema Structure Visualizer</h1>
-
-    <div class="info-bar">
-      This tool visualizes the structure of the properties field in "codegen/ingestion_config_models.schema.json". Click
-      on property names to expand or collapse their children.
-    </div>
+    <h1>CryoET Data Portal Ingestion Config Generator</h1>
 
     <div class="container">
       <div id="schema-tree">
@@ -168,22 +247,6 @@
 
             schemaTreeElement.appendChild(rootList);
 
-            // Additional properties for $defs section
-            // if (schemaData.$defs) {
-            //     const defsHeader = document.createElement('h2');
-            //     defsHeader.textContent = 'Schema Definitions ($defs)';
-            //     schemaTreeElement.appendChild(defsHeader);
-
-            //     const defsList = document.createElement('ul');
-            //     Object.keys(schemaData.$defs).forEach(defName => {
-            //         const defData = schemaData.$defs[defName];
-            //         const defItem = createPropertyElement(defName, defData, false, true);
-            //         defsList.appendChild(defItem);
-            //     });
-
-            //     schemaTreeElement.appendChild(defsList);
-            // }
-
             // Add event listeners for collapsible items
             addCollapsibleListeners();
           })
@@ -193,15 +256,18 @@
       });
 
       // Function to create a property element with all its children
-      function createPropertyElement(name, data, isRequired, isDef = false) {
+      function createPropertyElement(name, data, isRequired) {
         const item = document.createElement("li");
         item.className = "property";
 
+        // Create a container div for the property content (left side)
+        const propertyContent = document.createElement("div");
+        propertyContent.className = "property-content";
+
         const header = document.createElement("div");
+        header.className = "property-header";
 
         // If the property has sub-properties, make it collapsible
-        console.log(name, data);
-
         const hasChildren =
           data.properties ||
           (data.items && data.items.properties) ||
@@ -210,7 +276,7 @@
           data.$ref;
 
         if (hasChildren) {
-          header.className = "collapsible collapsed";
+          header.className += " collapsible collapsed";
         }
 
         const nameSpan = document.createElement("span");
@@ -222,7 +288,9 @@
         const typeSpan = document.createElement("span");
         typeSpan.className = "property-type";
 
-        typeSpan.textContent = `(${getType(data)})`;
+        const type = getType(data);
+        const isEditable = getTypeIsEditable(type);
+        typeSpan.textContent = `(${type.constructor === Array ? type.join(" | ") : type})`;
 
         header.appendChild(typeSpan);
 
@@ -234,15 +302,42 @@
           header.appendChild(requiredSpan);
         }
 
-        item.appendChild(header);
+        propertyContent.appendChild(header);
 
-        // Add description if available
+        // Add description if available - now as a hover element
         if (data.description) {
           const descSpan = document.createElement("span");
           descSpan.className = "property-description";
           descSpan.textContent = data.description;
-          item.appendChild(descSpan);
+          propertyContent.appendChild(descSpan);
         }
+
+        // If the type is editable, add the corresponding input field
+        if (isEditable) {
+          if (type.constructor === Array) {
+            for (const t of type) {
+              createEditableInput(data, propertyContent, t, isRequired);
+              console.log(t);
+            }
+          } else {
+            createEditableInput(data, propertyContent, type, isRequired);
+          }
+        }
+
+        // If not required, add disable button
+        if (!isRequired) {
+          const disableBtn = document.createElement("button");
+          disableBtn.className = "disable-btn";
+          disableBtn.textContent = "Disable";
+          disableBtn.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent triggering collapse when clicking the button
+            toggleDisable(item, disableBtn);
+          });
+          propertyContent.appendChild(disableBtn);
+        }
+
+        // Append the content div and button to the main item
+        item.appendChild(propertyContent);
 
         // Process child properties if any
         if (hasChildren) {
@@ -310,13 +405,145 @@
         return item;
       }
 
+      function createEditableInput(data, propertyContent, type, isRequired) {
+        const inputContainer = document.createElement("div");
+        inputContainer.className = "input-container";
+
+        let inputElement;
+
+        if (type === "boolean") {
+          inputElement = document.createElement("input");
+          inputElement.type = "checkbox";
+
+          if (data.default !== undefined) {
+            inputElement.checked = data.default;
+          }
+        } else if (type === "number" || type === "integer") {
+          inputElement = document.createElement("input");
+          inputElement.type = "number";
+
+          if (data.minimum !== undefined) inputElement.min = data.minimum;
+          if (data.maximum !== undefined) inputElement.max = data.maximum;
+
+          inputElement.step = type === "integer" ? "1" : "any";
+
+          if (data.default !== undefined) {
+            inputElement.value = data.default;
+          }
+        } else if (Array.isArray(type) && type.includes("string") && data.enum) {
+          inputElement = document.createElement("select");
+
+          const placeholderOption = document.createElement("option");
+          placeholderOption.value = "";
+          placeholderOption.textContent = "Select";
+          placeholderOption.disabled = true;
+          placeholderOption.selected = true;
+          inputElement.appendChild(placeholderOption);
+
+          data.enum.forEach((value) => {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value;
+
+            if (data.default === value) {
+              option.selected = true;
+              placeholderOption.selected = false;
+            }
+
+            inputElement.appendChild(option);
+          });
+        } else if (type.startsWith("ref:") && type.endsWith("Enum")) {
+          // Handle references to enum definitions
+          const enumName = type.substring(5, type.length - 4);
+          const enumData = defs[enumName + "Enum"];
+
+          if (enumData && enumData.enum) {
+            // Create a select dropdown for the enum reference
+            inputElement = document.createElement("select");
+
+            const placeholderOption = document.createElement("option");
+            placeholderOption.value = "";
+            placeholderOption.textContent = "Select";
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true;
+            inputElement.appendChild(placeholderOption);
+
+            enumData.enum.forEach((value) => {
+              const option = document.createElement("option");
+              option.value = value;
+              option.textContent = value;
+
+              if (data.default === value) {
+                option.selected = true;
+                placeholderOption.selected = false;
+              }
+
+              inputElement.appendChild(option);
+            });
+          }
+        } else {
+          // Default to text input for string and other types
+          inputElement = document.createElement("input");
+          inputElement.type = "text";
+
+          // Add pattern validation if specified
+          if (data.pattern) {
+            inputElement.pattern = data.pattern;
+            inputElement.title = `Must match pattern: ${data.pattern}`;
+          }
+
+          if (data.default !== undefined) {
+            inputElement.value = data.default;
+          }
+        }
+
+        // Add common attributes and styles
+        if (inputElement) {
+          inputElement.className = "property-input";
+          inputElement.style.marginLeft = "10px";
+
+          // Add placeholder if description exists
+          if (data.description) {
+            inputElement.placeholder = data.description.substring(0, 30) + (data.description.length > 30 ? "..." : "");
+            inputElement.title = data.description;
+          }
+
+          // Make required fields visually distinct
+          if (isRequired) {
+            inputElement.required = true;
+          }
+
+          // Add event listener to update the data model when input changes
+          inputElement.addEventListener("change", function () {
+            // Here you would update your data model
+            // This is just a placeholder for now
+            console.log(`${name} value changed to:`, this.type === "checkbox" ? this.checked : this.value);
+
+            // You might want to validate the input based on the schema constraints
+            if (this.validity && !this.validity.valid) {
+              this.style.borderColor = "#e74c3c";
+            } else {
+              this.style.borderColor = "";
+            }
+          });
+
+          inputContainer.appendChild(inputElement);
+          propertyContent.appendChild(inputContainer);
+        }
+      }
+
+      /**
+       * Function to determine the type of a property based on its schema definition.
+       * @param {Object} data - The schema definition of the property.
+       * @returns {string|Array} - The type of the property, or an array of types if applicable.
+       */
       function getType(data) {
         if (data.type) {
           // Handle array of types
           if (Array.isArray(data.type)) {
-            return `${data.type.join(" | ")}`;
+            return data.type.filter((type) => type !== "null");
           } else {
-            return `${data.type}`;
+            return data.type;
           }
         } else if (data.$ref) {
           const refName = data.$ref.split("/").pop();
@@ -327,12 +554,29 @@
             const option = data.anyOf.find((option) => option.type !== "null");
             return getType(option);
           } else {
-            return "anyOf";
+            return [...new Set(data.anyOf.map((option) => getType(option)))].filter((type) => type !== "null");
           }
-        } else if (isDef) {
-          return "definition";
         } else {
-          return "unknown type";
+          throw new Error("Unknown type");
+        }
+      }
+
+      function getTypeIsEditable(type) {
+        if (Array.isArray(type)) {
+          return type.some((t) => getTypeIsEditable(t));
+        }
+
+        if (["string", "number", "integer", "boolean"].includes(type)) {
+          return true;
+        } else if (type.endsWith("Enum")) {
+          return true;
+        } else if (["null", "object", "array", "anyOf"].includes(type)) {
+          return false;
+        } else if (type.startsWith("ref:")) {
+          return false;
+        } else {
+          console.warn(`Unknown type: ${type}`);
+          return false;
         }
       }
 
@@ -356,6 +600,17 @@
         }
       }
 
+      // Toggle disable state for an item and its children
+      function toggleDisable(item, button) {
+        if (item.classList.contains("disabled")) {
+          item.classList.remove("disabled");
+          button.textContent = "Disable";
+        } else {
+          item.classList.add("disabled");
+          button.textContent = "Enable";
+        }
+      }
+
       // Add click listeners for collapsible items
       function addCollapsibleListeners() {
         document.querySelectorAll(".collapsible").forEach((element) => {
@@ -363,7 +618,8 @@
             this.classList.toggle("collapsed");
 
             // Toggle visibility of the next sibling UL element
-            const childList = this.parentNode.querySelector("ul");
+            const parentItem = this.closest(".property");
+            const childList = parentItem.querySelector("ul");
             if (childList) {
               childList.classList.toggle("hidden");
             }
