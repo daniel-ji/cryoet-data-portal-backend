@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Schema Structure Visualizer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #schema-tree {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        overflow: auto;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 20px;
+      }
+
+      .property {
+        margin: 5px 0;
+        padding: 5px 0;
+        border-left: 2px solid transparent;
+      }
+
+      .property:hover {
+        border-left: 2px solid #3498db;
+        background-color: #ecf0f1;
+      }
+
+      .property-name {
+        font-weight: bold;
+        color: #2980b9;
+      }
+
+      .property-type {
+        color: #27ae60;
+        font-style: italic;
+        margin-left: 5px;
+      }
+
+      .property-description {
+        color: #7f8c8d;
+        display: block;
+        margin-left: 20px;
+        font-size: 0.9em;
+      }
+
+      .required {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-left: 5px;
+      }
+
+      .collapsible {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .collapsible::before {
+        content: "▼ ";
+        font-size: 0.8em;
+      }
+
+      .collapsed::before {
+        content: "► ";
+        font-size: 0.8em;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 20px;
+        font-size: 1.2em;
+        color: #7f8c8d;
+      }
+
+      .error {
+        color: #e74c3c;
+        border: 1px solid #e74c3c;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .info-bar {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JSON Schema Structure Visualizer</h1>
+
+    <div class="info-bar">
+      This tool visualizes the structure of the properties field in "codegen/ingestion_config_models.schema.json". Click
+      on property names to expand or collapse their children.
+    </div>
+
+    <div class="container">
+      <div id="schema-tree">
+        <div class="loading">Loading schema structure...</div>
+      </div>
+    </div>
+
+    <script>
+      let properties;
+      let defs;
+      let requriedProps;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const schemaTreeElement = document.getElementById("schema-tree");
+
+        // Fetch and parse the JSON schema file
+        fetch("codegen/ingestion_config_models.schema.json")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to fetch schema file");
+            }
+            return response.json();
+          })
+          .then((schemaData) => {
+            // Clear loading message
+            schemaTreeElement.innerHTML = "";
+
+            // Start with the main properties
+            properties = schemaData.properties;
+            defs = schemaData.$defs;
+            requiredProps = schemaData.required || [];
+
+            // Create the root list for properties
+            const rootList = document.createElement("ul");
+
+            // Process each property at the root level
+            Object.keys(properties).forEach((propName) => {
+              const propData = properties[propName];
+              const propItem = createPropertyElement(propName, propData, requiredProps.includes(propName));
+              rootList.appendChild(propItem);
+            });
+
+            schemaTreeElement.appendChild(rootList);
+
+            // Additional properties for $defs section
+            // if (schemaData.$defs) {
+            //     const defsHeader = document.createElement('h2');
+            //     defsHeader.textContent = 'Schema Definitions ($defs)';
+            //     schemaTreeElement.appendChild(defsHeader);
+
+            //     const defsList = document.createElement('ul');
+            //     Object.keys(schemaData.$defs).forEach(defName => {
+            //         const defData = schemaData.$defs[defName];
+            //         const defItem = createPropertyElement(defName, defData, false, true);
+            //         defsList.appendChild(defItem);
+            //     });
+
+            //     schemaTreeElement.appendChild(defsList);
+            // }
+
+            // Add event listeners for collapsible items
+            addCollapsibleListeners();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      });
+
+      // Function to create a property element with all its children
+      function createPropertyElement(name, data, isRequired, isDef = false) {
+        const item = document.createElement("li");
+        item.className = "property";
+
+        const header = document.createElement("div");
+
+        // If the property has sub-properties, make it collapsible
+        console.log(name, data);
+
+        const hasChildren =
+          data.properties ||
+          (data.items && data.items.properties) ||
+          (data.items && data.items.$ref) ||
+          (data.anyOf && data.anyOf.some((item) => item.properties || item.$ref)) ||
+          data.$ref;
+
+        if (hasChildren) {
+          header.className = "collapsible collapsed";
+        }
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "property-name";
+        nameSpan.textContent = name;
+        header.appendChild(nameSpan);
+
+        // Display the type information
+        const typeSpan = document.createElement("span");
+        typeSpan.className = "property-type";
+
+        typeSpan.textContent = `(${getType(data)})`;
+
+        header.appendChild(typeSpan);
+
+        // Mark required properties
+        if (isRequired) {
+          const requiredSpan = document.createElement("span");
+          requiredSpan.className = "required";
+          requiredSpan.textContent = "required";
+          header.appendChild(requiredSpan);
+        }
+
+        item.appendChild(header);
+
+        // Add description if available
+        if (data.description) {
+          const descSpan = document.createElement("span");
+          descSpan.className = "property-description";
+          descSpan.textContent = data.description;
+          item.appendChild(descSpan);
+        }
+
+        // Process child properties if any
+        if (hasChildren) {
+          const childList = document.createElement("ul");
+          childList.className = "hidden";
+
+          // Handle direct properties
+          if (data.properties) {
+            const requiredProps = data.required || [];
+            Object.keys(data.properties).forEach((childName) => {
+              const childData = data.properties[childName];
+              const childItem = createPropertyElement(childName, childData, requiredProps.includes(childName));
+              childList.appendChild(childItem);
+            });
+          }
+
+          // Handle array items
+          if (data.items) {
+            if (data.items.properties) {
+              const arrayItemHeader = document.createElement("li");
+              arrayItemHeader.textContent = "(array items)";
+              childList.appendChild(arrayItemHeader);
+
+              const requiredProps = data.items.required || [];
+              Object.keys(data.items.properties).forEach((childName) => {
+                const childData = data.items.properties[childName];
+                const childItem = createPropertyElement(childName, childData, requiredProps.includes(childName));
+                childList.appendChild(childItem);
+              });
+            } else if (data.items.$ref) {
+              const childName = data.items.$ref.replace("#/$defs/", "");
+              const childData = defs[childName];
+              const childItem = createPropertyElement(childName, childData, requiredProps.includes(childName));
+              childList.appendChild(childItem);
+            }
+          }
+
+          // Handle anyOf
+          if (data.anyOf) {
+            // Handle case that there are only two elements and one is null
+            if ((data.anyOf.length === 2 && data.anyOf[0].type === "null") || data.anyOf[1].type === "null") {
+              const option = data.anyOf.find((option) => option.type !== "null");
+              addChild(option, childList);
+            } else {
+              data.anyOf.forEach((option, index) => {
+                const optionItem = document.createElement("li");
+                optionItem.textContent = `Option ${index + 1}:`;
+                childList.appendChild(optionItem);
+                addChild(option, childList);
+              });
+            }
+          }
+
+          // Handle $ref
+          if (data.$ref && !data.properties) {
+            const refName = data.$ref.split("/").pop();
+            const refItem = document.createElement("li");
+            refItem.textContent = `(ref: ${refName})`;
+            childList.appendChild(refItem);
+          }
+
+          item.appendChild(childList);
+        }
+
+        return item;
+      }
+
+      function getType(data) {
+        if (data.type) {
+          // Handle array of types
+          if (Array.isArray(data.type)) {
+            return `${data.type.join(" | ")}`;
+          } else {
+            return `${data.type}`;
+          }
+        } else if (data.$ref) {
+          const refName = data.$ref.split("/").pop();
+          return `ref: ${refName}`;
+        } else if (data.anyOf) {
+          // Handle case where only two elements and one is null
+          if ((data.anyOf.length === 2 && data.anyOf[0].type === "null") || data.anyOf[1].type === "null") {
+            const option = data.anyOf.find((option) => option.type !== "null");
+            return getType(option);
+          } else {
+            return "anyOf";
+          }
+        } else if (isDef) {
+          return "definition";
+        } else {
+          return "unknown type";
+        }
+      }
+
+      function addChild(child, childList) {
+        if (child.properties) {
+          const requiredProps = child.required || [];
+          Object.keys(child.properties).forEach((childName) => {
+            const childData = child.properties[childName];
+            const childItem = createPropertyElement(childName, childData, requiredProps.includes(childName));
+            childList.appendChild(childItem);
+          });
+        } else if (child.$ref) {
+          const childName = child.$ref.replace("#/$defs/", "");
+          const childData = defs[childName];
+          const childItem = createPropertyElement(childName, childData, requiredProps.includes(childName));
+          childList.appendChild(childItem);
+        } else if (child.type) {
+          const typeItem = document.createElement("li");
+          typeItem.textContent = `(type: ${child.type})`;
+          childList.appendChild(typeItem);
+        }
+      }
+
+      // Add click listeners for collapsible items
+      function addCollapsibleListeners() {
+        document.querySelectorAll(".collapsible").forEach((element) => {
+          element.addEventListener("click", function () {
+            this.classList.toggle("collapsed");
+
+            // Toggle visibility of the next sibling UL element
+            const childList = this.parentNode.querySelector("ul");
+            if (childList) {
+              childList.classList.toggle("hidden");
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
